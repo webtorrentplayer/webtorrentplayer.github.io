@@ -54,7 +54,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="#"><i class="fa fa-cloud-download"></i> WebTorrent Player</a>
+        <a class="navbar-brand" href="#"><i class="fa fa-play-circle"></i> WebTorrent Player</a>
         <!-- <a class="btn btn-primary" href="#">Sign In</a> -->
       </div>
     </nav>
@@ -96,8 +96,7 @@
             <code id="numPeers">0 peers</code>
             <span class="show-seed d-none">Seeding </span>
             <span class="show-seed d-none"> to </span>
-          
-        
+
             <p>
               Down Speed: <code id="downloadSpeed">0 b/s</code> - Up speed: <code id="uploadSpeed">0 b/s</code>
             </p>
@@ -137,41 +136,6 @@
         </div>
       </div>
     </header>
-
-    <!-- 
-    <section class="features-icons bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-screen-desktop m-auto text-primary"></i>
-              </div>
-              <h3>Fully Responsive</h3>
-              <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-layers m-auto text-primary"></i>
-              </div>
-              <h3>Bootstrap 4 Ready</h3>
-              <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-check m-auto text-primary"></i>
-              </div>
-              <h3>Easy to Use</h3>
-              <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
 
     <!-- Footer -->
     <footer class="footer bg-light">
@@ -232,17 +196,17 @@
     <script src="js/bundle.js"></script>
 
     <script>
-      /*
       $(document).ready(function() {
         var url_string = window.location.href;
         var url = new URL(url_string);
         var magnetBase64 = url.searchParams.get("magnet");
-        //console.log(magnetBase64);
-        var magnetLink = atob(magnetBase64)
-        //console.log(magnetLink);
-
-       $("#downloadLink").attr("href", magnetLink);
-      })*/
+        if (magnetBase64) {
+          console.log(magnetBase64);
+          var magnetLink = atob(magnetBase64)
+          console.log(magnetLink);
+          //$("#downloadLink").attr("href", magnetLink);
+        }
+      });
     </script>
 
 

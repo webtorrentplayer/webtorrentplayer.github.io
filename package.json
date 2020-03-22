@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/webtorrentplayer/webtorrentplayer.github.io/issues"
   },
-  "homepage": "https://github.com/webtorrentplayer/webtorrentplayer.github.io#readme",
+  "homepage": "https://webtorrentplayer.github.io/",
   "dependencies": {
     "bootstrap": "4.1.1",
     "browserify": "^16.5.0",
