@@ -21,6 +21,22 @@ $(document).ready(function () {
 	});
 
 	fitMagnetInput();
+
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var magnetBase64 = url.searchParams.get("magnet");
+	if (magnetBase64) {
+	  console.log(magnetBase64);
+	  var magnetLink = atob(magnetBase64)
+	  console.log(magnetLink);
+	  if (magnetLink.match(/magnet:\?xt=urn:[a-z0-9]{20,50}/i) != null) {
+		  console.log("magnet link is valid, proceeding");
+		  //$("#downloadLink").attr("href", magnetLink);
+		  downloadTorrent(torrentId);
+	  } else {
+		console.log("magnet link is INVALID");
+	  }	  
+	}
 });
 
 function fitMagnetInput() {

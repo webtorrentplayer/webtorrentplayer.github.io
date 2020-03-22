@@ -108,10 +108,10 @@
             <div id="share-clipboard" class="text-center">
               <h4>Enjoyed? Please spread the word:</h4>
               <span>Send to  </span>
-              
-              <a id="whatsappLink" class="btn"><i class="fa fa-whatsapp"></i> Whatsapp</a>
+
               <a id="facebookLink" class="btn"><i class="fa fa-facebook"></i> Facebook</a>
-              <input id="share-url" type="text" readonly><button id="share-url-btn" class="btn" type="button" data-toggle="tooltip" title="Copy to clipboard" data-clipboard-target="#share-url">Copy to clipboard</button>
+              <a id="whatsappLink" class="btn"><i class="fa fa-whatsapp"></i> Whatsapp</a>              
+              <input id="share-url" type="text" readonly><button id="share-url-btn" class="btn" type="button" data-toggle="tooltip" title="Copy to clipboard" data-clipboard-target="#share-url"><i class="fa fa-clipboard"></i> Copy to clipboard</button>
             </div>
 
             <p>
@@ -197,15 +197,7 @@
 
     <script>
       $(document).ready(function() {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var magnetBase64 = url.searchParams.get("magnet");
-        if (magnetBase64) {
-          console.log(magnetBase64);
-          var magnetLink = atob(magnetBase64)
-          console.log(magnetLink);
-          //$("#downloadLink").attr("href", magnetLink);
-        }
+
       });
     </script>
 
