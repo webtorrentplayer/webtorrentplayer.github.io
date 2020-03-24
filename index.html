@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>WebTorrent Player</title>
+    <title>WebTorrent Player - Stream Torrents On Browser</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,24 +28,7 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-134338586-1');
-    </script>    
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '613790439042256');
-      fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=613790439042256&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->    
   </head>
 
   <body>
@@ -54,7 +36,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="https://webtorrentplayer.github.io/"><i class="fa fa-play-circle"></i> WebTorrentPlayer.github.io</a>
+        <a class="navbar-brand" href="https://webtorrentplayer.github.io/"><i class="fa fa-play-circle"></i> WebTorrentPlayer.github.io - Alpha version</a>
         <!-- <a class="btn btn-primary" href="#">Sign In</a> -->
       </div>
     </nav>
@@ -64,9 +46,6 @@
       <!-- <div class="overlay"></div> -->
       <div class="container">
         <div class="row">
-          <!-- <div class="col-xl-12 mx-auto">
-            <h1 class="mb-5">WebTorrent Download & Play On Browser</h1>
-          </div> -->
           <div class="col-xl-12 mx-auto">
             <p>
               Plese insert a torrent url or magnet link:
@@ -193,14 +172,5 @@
   
     <!-- `browserify main.js -o bundle.js` -->
     <script src="js/bundle.js"></script>
-
-    <script>
-      $(document).ready(function() {
-
-      });
-    </script>
-
-
   </body>
-
 </html>
