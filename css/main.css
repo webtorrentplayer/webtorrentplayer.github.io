@@ -4,6 +4,18 @@ video {
     margin-bottom: 10px;    
 }
 
+#infoMessage {
+    display: none;
+}
+
+#status {
+    display: none;
+}
+
+#share-url {
+    width: 50%;
+}
+
 #share-clipboard {
     margin-top: 1em;
     margin-bottom: 1em; 

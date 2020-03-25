@@ -1,19 +1,25 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 require('./webtorrent.js');
 
+var shareUrl = null;
+
 var clipboard = new Clipboard('#share-url-btn');
+
 clipboard.on('success', function (e) {
 	//$('#share-url-btn').attr('title', 'Copied!').tooltip('fixTitle').tooltip('show');
 	$('#share-url-btn').attr('title', 'Copied!');
 	e.clearSelection();
 });
 
+
 $(window).bind("resize", function () {
 	fitMagnetInput();
 });
 
+
 $(document).ready(function () {
-	$('#share-url').val(window.location.href);
+	shareUrl = window.location.href;
+	$('#share-url').val(shareUrl);
 	$('[data-toggle="tooltip"]').tooltip();
 	$('#share-url-btn').mouseleave(function () {
 		//$('#share-url-btn').attr('title', 'Copy to clipboard').tooltip('fixTitle');
@@ -21,22 +27,6 @@ $(document).ready(function () {
 	});
 
 	fitMagnetInput();
-
-	var url_string = window.location.href;
-	var url = new URL(url_string);
-	var magnetBase64 = url.searchParams.get("magnet");
-	if (magnetBase64) {
-	  console.log(magnetBase64);
-	  var magnetLink = atob(magnetBase64)
-	  console.log(magnetLink);
-	  if (magnetLink.match(/magnet:\?xt=urn:[a-z0-9]{20,50}/i) != null) {
-		  console.log("magnet link is valid, proceeding");
-		  //$("#downloadLink").attr("href", magnetLink);
-		  downloadTorrent(torrentId);
-	  } else {
-		console.log("magnet link is INVALID");
-	  }	  
-	}
 });
 
 function fitMagnetInput() {
@@ -67,10 +57,7 @@ var announceList = [
 ['udp://tracker.leechers-paradise.org:6969'],
 ['udp://tracker.coppersurfer.tk:6969'],
 ['udp://exodus.desync.com:6969'],
-['wss://tracker.webtorrent.io'],
-['wss://tracker.btorrent.xyz'],
 ['wss://tracker.openwebtorrent.com'],
-['wss://tracker.fastcast.nz']
 ]
 
 global.WEBTORRENT_ANNOUNCE = announceList
@@ -101,12 +88,39 @@ $('form').submit(function(e) {
 onHashChange()
 window.addEventListener('hashchange', onHashChange)
 function onHashChange () {
+	console.log("checking if url has hash");
 	var hash = decodeURIComponent(window.location.hash.substring(1)).trim()
-	if (hash !== '') downloadTorrent(hash)
+	if (hash !== '') {
+		$("input[name=torrentId]").val(hash);
+		downloadTorrent(hash)
+	} else {
+		console.log("no hash on url")
+	}
+}
+
+//handle magnet as url parameter (/?magnet=BASE64ENCODED)
+$(document).ready(function() {
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var magnetBase64 = url.searchParams.get("magnet");
+	if (magnetBase64) {
+	  console.log("donwloading by url paramenter magnet=BASE64ENCODEDMAGNETLINK");
+	  //console.log(magnetBase64);
+	  var magnetLink = atob(magnetBase64);
+	  console.log(magnetLink);
+	  $("input[name=torrentId]").val(magnetLink);
+	  downloadTorrent(magnetLink);
+	}
+});
+
+function updateShareLinks(){
+
 }
 
 function downloadTorrent(torrentId) {
-	console.log('Downloading torrent from ' + torrentId)
+	//console.log('Downloading torrent from ' + torrentId)
+	$("#infoMessage").show();
+	$("#infoMessage").text("Fetching metadata...");
 	client.add(torrentId, onTorrent)
 }
 
@@ -115,6 +129,8 @@ function onTorrent(torrent) {
 	torrent.on('error', console.log)
 
 	console.log('Got torrent metadata!')
+	$("#infoMessage").text("Got torrent metadata!");
+	$("#infoMessage").hide();
 
 	// Find largest file
 	var largestFile = torrent.files[0]
@@ -127,23 +143,21 @@ function onTorrent(torrent) {
 	$streamedFileName.html(largestFile.name)
 
 	// Update clipboard share url
-	$('#share-url').val(
-		location.protocol +
-		'//' +
-		location.host +
-		location.pathname +
-		(location.search?location.search:"") + 
-		"#" +
-		torrent.infoHash);
+	shareUrl = 
+		location.protocol + '//' + location.host + location.pathname +
+		(location.search?location.search:"") + "#" + torrent.infoHash;
+
+	$('#share-url').val(shareUrl);
 
 	// Stream the file in the browser
 	largestFile.appendTo('#output')
-
+	$("#status").show();
+	
 	// hide magnet input
-	$('#magnet-input').slideUp()
+	//$('#magnet-input').slideUp()
 
 	// show player
-	$('#hero').slideDown()
+	//$('#hero').slideDown()
 
 	// Trigger statistics refresh
 	torrent.on('done', onDone)
@@ -177,7 +191,7 @@ function onTorrent(torrent) {
 	}
 
 	function onDone () {
-		$body.addClass('is-seed')
+		//$body.addClass('is-seed')
 		onProgress()
 	}
 }

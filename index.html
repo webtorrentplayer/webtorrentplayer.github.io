@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/landing-page.min.css" rel="stylesheet">
-    
+    <link href="css/landing-page.min.css" rel="stylesheet">    
     <link href="css/main.min.css" rel="stylesheet">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134338586-1"></script>
@@ -48,16 +47,17 @@
         <div class="row">
           <div class="col-xl-12 mx-auto">
             <p>
-              Plese insert a torrent url or magnet link:
+              Torrent url, magnet link or infohash:
             </p>
             <form id="magnet-input">
               <input name="torrentId" placeholder="magnet: link or url to .torrent file"><button type="submit">Play</button>
             </form>
+            <span id="infoMessage"></span>
           </div>
         </div>
         
         <div class="row">
-          <div class="col-xl-9 mx-auto">            
+          <div class="col-xl-12 mx-auto">            
             <div id="hero">
               <div id="output">
                 <div id="progressBar"></div>
@@ -66,24 +66,31 @@
             </div>
           </div>
 
-          <div id="status" class="col-xl-3 mx-auto">
-            Status<br>
-            Downloaded <code id="downloaded">0 MB</code> of <code id="total">0 MB</code> - <span id="remaining">unknown minutes remaining</span>
-            <span class="show-leech d-none">Downloading </span> 
-            <code id="streamedFileName"></code>
-            <span class="show-leech"> - </span>
+          <div id="status" class="col-xl-12 mx-auto">
             <code id="numPeers">0 peers</code>
-            <span class="show-seed d-none">Seeding </span>
-            <span class="show-seed d-none"> to </span>
-
-            <p>
-              Down Speed: <code id="downloadSpeed">0 b/s</code> - Up speed: <code id="uploadSpeed">0 b/s</code>
-            </p>
-          </div> 
+            <span> - </span>
+            <span>Speed </span>            
+            <code id="downloadSpeed">0 b/s</code>
+            <span>Down </span>
+            <span> - </span>            
+            <code id="uploadSpeed">0 b/s</code>
+            <span>Up </span>
+            <span> - </span>            
+            <span id="remaining"></span>
+            <span> - </span>
+            <code id="downloaded">0 MB</code> of <code id="total">0 MB</code>
+            <span></span>
+            <!-- <span class="show-leech d-none">Downloading </span>  -->
+            <!-- <code id="streamedFileName"></code> -->
+            <!-- <span class="show-leech"> - </span> -->
+            <!-- <span class="show-seed d-none">Seeding </span>
+            <span class="show-seed d-none"> to </span> -->
+          </div>
+          
         </div>         
         
         <div class="row">
-          <div class="col-xl-12 mx-auto">             
+          <div class="col-xl-12 mx-auto">           
             <div id="share-clipboard" class="text-center">
               <h4>Enjoyed? Please spread the word:</h4>
               <!-- <span>Send to  </span>

@@ -4,7 +4,9 @@
   "description": "A WebTorrent palyer. Stream torrents directly to the browser.",
   "main": "index.js",
   "scripts": {
-    "prestart": "browserify -e js\\main.js -o js\\bundle.js && gulp css",
+    "build-css": "gulp css",
+    "build-js": "browserify -e js\\main.js -o js\\bundle.js",
+    "watch": "watch \"npm run build-js\" js",
     "start": "http-server"
   },
   "repository": {
@@ -36,6 +38,7 @@
     "gulp-clean-css": "3.9.4",
     "gulp-header": "2.0.5",
     "gulp-rename": "1.3.0",
-    "gulp-sass": "4.0.1"
+    "gulp-sass": "4.0.1",
+    "watch": "^1.0.2"
   }
 }
