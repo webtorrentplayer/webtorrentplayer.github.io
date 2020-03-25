@@ -41,9 +41,9 @@ var moment = require('moment')
 var prettyBytes = require('pretty-bytes')
 
 // HTML elements
-var $body = $('body')
+//var $body = $('body')
 //var $progressBar = $('#progressBar')
-var $streamedFileName = $('#streamedFileName')
+//var $streamedFileName = $('#streamedFileName')
 var $numPeers = $('#numPeers')
 var $downloaded = $('#downloaded')
 var $total = $('#total')
@@ -52,21 +52,24 @@ var $uploadSpeed = $('#uploadSpeed')
 var $downloadSpeed = $('#downloadSpeed')
 
 var announceList = [
-['udp://tracker.openbittorrent.com:80'],
-['udp://tracker.internetwarriors.net:1337'],
-['udp://tracker.leechers-paradise.org:6969'],
-['udp://tracker.coppersurfer.tk:6969'],
-['udp://exodus.desync.com:6969'],
-['wss://tracker.openwebtorrent.com'],
-]
+	['udp://tracker.openbittorrent.com:80'],
+	['udp://tracker.internetwarriors.net:1337'],
+	['udp://tracker.leechers-paradise.org:6969'],
+	['udp://tracker.coppersurfer.tk:6969'],
+	['udp://exodus.desync.com:6969'],
+	['wss://tracker.webtorrent.io'],
+	['wss://tracker.btorrent.xyz'],
+	['wss://tracker.openwebtorrent.com'],
+	['wss://tracker.fastcast.nz']
+];
 
 global.WEBTORRENT_ANNOUNCE = announceList
-.map(function (arr) {
-	return arr[0]
-})
-.filter(function (url) {
-	return url.indexOf('wss://') === 0 || url.indexOf('ws://') === 0
-})
+	.map(function (arr) {
+		return arr[0];
+	})
+	.filter(function (url) {
+		return url.indexOf('wss://') === 0 || url.indexOf('ws://') === 0;
+	});
 
 var client = new WebTorrent()
 
@@ -88,14 +91,8 @@ $('form').submit(function(e) {
 onHashChange()
 window.addEventListener('hashchange', onHashChange)
 function onHashChange () {
-	console.log("checking if url has hash");
 	var hash = decodeURIComponent(window.location.hash.substring(1)).trim()
-	if (hash !== '') {
-		$("input[name=torrentId]").val(hash);
-		downloadTorrent(hash)
-	} else {
-		console.log("no hash on url")
-	}
+	if (hash !== '') downloadTorrent(hash)
 }
 
 //handle magnet as url parameter (/?magnet=BASE64ENCODED)
@@ -140,7 +137,7 @@ function onTorrent(torrent) {
 	}
 
 	// Display name of the file being streamed
-	$streamedFileName.html(largestFile.name)
+	//$streamedFileName.html(largestFile.name)
 
 	// Update clipboard share url
 	shareUrl = 
@@ -150,7 +147,7 @@ function onTorrent(torrent) {
 	$('#share-url').val(shareUrl);
 
 	// Stream the file in the browser
-	largestFile.appendTo('#output')
+	largestFile.appendTo('#output');
 	$("#status").show();
 	
 	// hide magnet input
@@ -170,7 +167,7 @@ function onTorrent(torrent) {
 		$numPeers.html(torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers'))
 
 		// Progress
-		var percent = Math.round(torrent.progress * 100 * 100) / 100
+		//var percent = Math.round(torrent.progress * 100 * 100) / 100
 		//$progressBar.width(percent + '%')
 		$downloaded.html(prettyBytes(torrent.downloaded))
 		$total.html(prettyBytes(torrent.length))

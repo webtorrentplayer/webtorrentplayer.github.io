@@ -2,7 +2,7 @@ var moment = require('moment')
 var prettyBytes = require('pretty-bytes')
 
 // HTML elements
-var $body = $('body')
+//var $body = $('body')
 //var $progressBar = $('#progressBar')
 //var $streamedFileName = $('#streamedFileName')
 var $numPeers = $('#numPeers')
@@ -22,15 +22,15 @@ var announceList = [
 	['wss://tracker.btorrent.xyz'],
 	['wss://tracker.openwebtorrent.com'],
 	['wss://tracker.fastcast.nz']
-]
+];
 
 global.WEBTORRENT_ANNOUNCE = announceList
-.map(function (arr) {
-	return arr[0]
-})
-.filter(function (url) {
-	return url.indexOf('wss://') === 0 || url.indexOf('ws://') === 0
-})
+	.map(function (arr) {
+		return arr[0];
+	})
+	.filter(function (url) {
+		return url.indexOf('wss://') === 0 || url.indexOf('ws://') === 0;
+	});
 
 var client = new WebTorrent()
 
@@ -52,14 +52,8 @@ $('form').submit(function(e) {
 onHashChange()
 window.addEventListener('hashchange', onHashChange)
 function onHashChange () {
-	console.log("checking if url has hash");
 	var hash = decodeURIComponent(window.location.hash.substring(1)).trim()
-	if (hash !== '') {
-		//$("input[name=torrentId]").val(hash);
-		downloadTorrent(hash)
-	} else {
-		console.log("no hash on url")
-	}
+	if (hash !== '') downloadTorrent(hash)
 }
 
 //handle magnet as url parameter (/?magnet=BASE64ENCODED)
@@ -114,7 +108,7 @@ function onTorrent(torrent) {
 	$('#share-url').val(shareUrl);
 
 	// Stream the file in the browser
-	largestFile.appendTo('#output')
+	largestFile.appendTo('#output');
 	$("#status").show();
 	
 	// hide magnet input
@@ -134,7 +128,7 @@ function onTorrent(torrent) {
 		$numPeers.html(torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers'))
 
 		// Progress
-		var percent = Math.round(torrent.progress * 100 * 100) / 100
+		//var percent = Math.round(torrent.progress * 100 * 100) / 100
 		//$progressBar.width(percent + '%')
 		$downloaded.html(prettyBytes(torrent.downloaded))
 		$total.html(prettyBytes(torrent.length))
