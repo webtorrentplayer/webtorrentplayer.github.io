@@ -13,15 +13,20 @@ var $uploadSpeed = $('#uploadSpeed')
 var $downloadSpeed = $('#downloadSpeed')
 
 var announceList = [
-	['udp://tracker.openbittorrent.com:80'],
-	['udp://tracker.internetwarriors.net:1337'],
-	['udp://tracker.leechers-paradise.org:6969'],
-	['udp://tracker.coppersurfer.tk:6969'],
-	['udp://exodus.desync.com:6969'],
+	// ['udp://tracker.openbittorrent.com:80'],
+	// ['udp://tracker.internetwarriors.net:1337'],
+	// ['udp://tracker.leechers-paradise.org:6969'],
+	// ['udp://tracker.coppersurfer.tk:6969'],
+	// ['udp://exodus.desync.com:6969'],
 	['wss://tracker.webtorrent.io'],
 	['wss://tracker.btorrent.xyz'],
 	['wss://tracker.openwebtorrent.com'],
-	['wss://tracker.fastcast.nz']
+	['wss://tracker.fastcast.nz'],
+	['wss://tracker.files.fm:7073/announce'],
+	['wss://spacetradersapi-chatbox.herokuapp.com:443/announce'],
+	['wss://peertube.cpy.re:443/tracker/socket'],
+	['ws://tracker.files.fm:7072/announce'],
+	['ws://hub.bugout.link:80/announce'],
 ];
 
 global.WEBTORRENT_ANNOUNCE = announceList
@@ -105,7 +110,12 @@ function onTorrent(torrent) {
 		location.protocol + '//' + location.host + location.pathname +
 		(location.search?location.search:"") + "#" + torrent.infoHash;
 
-	$('#share-url').val(shareUrl);
+	// $('#share-url').val(shareUrl);	
+	$('#share-url-btn').attr('data-clipboard-text', shareUrl);
+	var shareUrlEncoded = encodeURIComponent(shareUrl);
+	$('#whatsappLink').attr('href', `https://api.whatsapp.com/send?text=${shareUrlEncoded}`);
+	$('#facebookLink').attr('href', `https://www.facebook.com/sharer/sharer.php?u=${shareUrlEncoded}`);
+	$('#emailLink').attr('href', `mailto:?body=${shareUrlEncoded}`);
 
 	// Stream the file in the browser
 	largestFile.appendTo('#output');

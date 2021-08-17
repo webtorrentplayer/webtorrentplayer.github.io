@@ -35,7 +35,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="https://webtorrentplayer.github.io/"><i class="fa fa-play-circle"></i> WebTorrentPlayer.github.io - Alpha version</a>
+        <a class="navbar-brand" href="https://webtorrentplayer.github.io/">
+          <i class="fa fa-play-circle"></i> WebTorrent Player
+        </a>
         <!-- <a class="btn btn-primary" href="#">Sign In</a> -->
       </div>
     </nav>
@@ -47,10 +49,17 @@
         <div class="row">
           <div class="col-xl-12 mx-auto">
             <p>
-              Torrent url, magnet link or infohash:
+              Please provide a torrent url, magnet link or infohash:
             </p>
             <form id="magnet-input">
-              <input name="torrentId" placeholder="magnet: link or url to .torrent file"><button type="submit">Play</button>
+              <div class="input-group mb-3">
+                <input name="torrentId" type="text" class="form-control" placeholder="Magnet link or torrent url">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Stream</button>
+                </div>
+              </div>
+              
+              <!-- <input name="torrentId" placeholder="magnet: link or url to .torrent file"><button type="submit">Play</button> -->
             </form>
             <span id="infoMessage"></span>
           </div>
@@ -69,7 +78,7 @@
           <div id="status" class="col-xl-12 mx-auto">
             <code id="numPeers">0 peers</code>
             <span> - </span>
-            <span>Speed </span>            
+            <span></span>            
             <code id="downloadSpeed">0 b/s</code>
             <span>Down </span>
             <span> - </span>            
@@ -92,11 +101,37 @@
         <div class="row">
           <div class="col-xl-12 mx-auto">           
             <div id="share-clipboard" class="text-center">
-              <h4>Enjoyed? Please spread the word:</h4>
-              <!-- <span>Send to  </span>
-              <a id="facebookLink" class="btn"><i class="fa fa-facebook"></i> Facebook</a>
-              <a id="whatsappLink" class="btn"><i class="fa fa-whatsapp"></i> Whatsapp</a>               -->
-              <input id="share-url" type="text" readonly><button id="share-url-btn" class="btn" type="button" data-toggle="tooltip" title="Copy to clipboard" data-clipboard-target="#share-url"><i class="fa fa-clipboard"></i> Copy to clipboard</button>
+              <h4>Send to your friends:</h4>
+              <!-- <span>Send to  </span> -->
+<!-- 
+              <input 
+                id="share-url" 
+                type="text" 
+                readonly 
+              /> -->
+
+              <button 
+                id="share-url-btn" 
+                class="btn" 
+                type="button" 
+                data-toggle="tooltip" 
+                title="Copy to clipboard" 
+                data-clipboard-text=""
+              >
+                <i class="fa fa-clipboard"></i> Copy to clipboard
+              </button>
+
+              <a id="whatsappLink" class="btn" target="_blank">
+                <i class="fa fa-whatsapp"></i> Whatsapp
+              </a>
+
+              <a id="facebookLink" class="btn" target="_blank">
+                <i class="fa fa-facebook"></i> Facebook
+              </a>
+
+              <a id="emailLink" class="btn btn-secondary" target="_blank">
+                <i class="fa fa-envelope"></i> Email
+              </a>
             </div>
 
             <p>
