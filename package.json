@@ -24,7 +24,7 @@
   },
   "homepage": "https://webtorrentplayer.github.io/",
   "dependencies": {
-    "bootstrap": "4.1.1",
+    "bootstrap": "4.4.1",
     "browserify": "^16.5.0",
     "font-awesome": "4.7.0",
     "jquery": "3.5.0",
