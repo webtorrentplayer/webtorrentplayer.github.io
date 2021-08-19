@@ -13,20 +13,14 @@ var $uploadSpeed = $('#uploadSpeed')
 var $downloadSpeed = $('#downloadSpeed')
 
 var announceList = [
-	// ['udp://tracker.openbittorrent.com:80'],
-	// ['udp://tracker.internetwarriors.net:1337'],
-	// ['udp://tracker.leechers-paradise.org:6969'],
-	// ['udp://tracker.coppersurfer.tk:6969'],
-	// ['udp://exodus.desync.com:6969'],
-	['wss://tracker.webtorrent.io'],
-	['wss://tracker.btorrent.xyz'],
+	['udp://tracker.leechers-paradise.org:6969'],
+	['udp://tracker.coppersurfer.tk:6969'],
+	['udp://tracker.opentrackr.org:1337'],
+	['udp://explodie.org:6969'],
+	['udp://tracker.empire-js.us:1337'],
 	['wss://tracker.openwebtorrent.com'],
+	['wss://tracker.btorrent.xyz'],	
 	['wss://tracker.fastcast.nz'],
-	['wss://tracker.files.fm:7073/announce'],
-	['wss://spacetradersapi-chatbox.herokuapp.com:443/announce'],
-	['wss://peertube.cpy.re:443/tracker/socket'],
-	['ws://tracker.files.fm:7072/announce'],
-	['ws://hub.bugout.link:80/announce'],
 ];
 
 global.WEBTORRENT_ANNOUNCE = announceList
